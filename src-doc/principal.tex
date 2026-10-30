@@ -1,0 +1,1199 @@
+% ---------------------------------------------------------------------------
+% Sprint 1 — Documento de Visão e Definição da Solução
+% Sentinela Nuclear Challenge (AMAZUL) — Grupo NextGen — 2CCPS — FIAP
+% Formatação segundo ABNT NBR 14724 (estrutura) e NBR 6023 (referências)
+% ---------------------------------------------------------------------------
+\documentclass[12pt,a4paper,oneside]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage[top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+
+\renewcommand{\contentsname}{SUMÁRIO}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabela}
+\hyphenpenalty=4000
+\tolerance=2500
+\emergencystretch=3em
+
+\titleformat{\section}{\normalfont\bfseries\large}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\bfseries\normalsize}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\itshape}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5\baselineskip}{1\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.2\baselineskip}{0.8\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{1\baselineskip}{0.6\baselineskip}
+
+\renewcommand{\cfttoctitlefont}{\hfill\bfseries\large}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\setlength{\cftbeforesecskip}{4pt}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\captionsetup{labelsep=endash,font=small,justification=centering,
+              singlelinecheck=false,skip=4pt}
+\newcommand{\fonte}[1]{\par\vspace{5pt}{\footnotesize\singlespacing Fonte: #1\par}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\tabularxcolumn}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\cab}[1]{\textbf{\footnotesize #1}}
+
+\begin{document}
+\onehalfspacing
+
+% =========================================================== CAPA
+\thispagestyle{empty}
+\begin{center}
+{\large\bfseries FACULDADE DE INFORMÁTICA E ADMINISTRAÇÃO PAULISTA — FIAP}\\[2pt]
+{\normalsize CIÊNCIA DA COMPUTAÇÃO — TURMA 2CCPS}\\[2pt]
+{\normalsize SOFTWARE ENGINEERING — GRUPO NEXTGEN}
+
+\vspace{1.4cm}
+{\normalsize
+GUSTAVO FRANZOTI GONÇALVES — RM566983\\
+LINCOLN SIMÃO PEREIRA — RM567284\\
+MAYKON SANTANA FONSECA — RM567041\\
+NICOLAS SAKAUE NISHIMURA — RM567752\par}
+
+\vspace{2.6cm}
+{\LARGE\bfseries ARGOS\par}
+\vspace{0.4cm}
+{\large Análise de Risco e Guarda Operacional por Sensoriamento\par}
+\vspace{0.8cm}
+{\normalsize\bfseries DOCUMENTO DE VISÃO E DEFINIÇÃO DA SOLUÇÃO\par}
+\vspace{0.3cm}
+{\normalsize Sprint 1 — Sentinela Nuclear Challenge\par}
+\vspace{0.2cm}
+{\normalsize AMAZUL — Amazônia Azul Tecnologias de Defesa S.A.\par}
+
+\vfill
+{\normalsize SÃO PAULO\\2026\par}
+\end{center}
+\newpage
+
+% =========================================================== FOLHA DE ROSTO
+\thispagestyle{empty}
+\begin{center}
+{\normalsize GRUPO NEXTGEN — 2CCPS\par}
+\vspace{2.4cm}
+{\large\bfseries ARGOS: DOCUMENTO DE VISÃO E DEFINIÇÃO DA SOLUÇÃO\par}
+\vspace{0.4cm}
+{\normalsize Sprint 1 do Sentinela Nuclear Challenge\par}
+\end{center}
+
+\vspace{1.4cm}
+\begin{flushright}
+\begin{minipage}{0.54\textwidth}
+\singlespacing\small
+Documento de Visão elaborado para a Sprint 1 da disciplina de Software
+Engineering, do curso de Ciência da Computação da FIAP, em resposta ao desafio
+Sentinela Nuclear proposto pela AMAZUL — Amazônia Azul Tecnologias de Defesa
+S.A.
+
+\vspace{6pt}
+Prof.\ Leandro Ramos da Silva
+\end{minipage}
+\end{flushright}
+
+\vspace{1.4cm}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\singlespacing\small
+\textbf{Integrantes do grupo}\\[6pt]
+\begin{tabularx}{\textwidth}{L{6.6cm} L{3.0cm} X}
+\toprule
+\cab{Nome} & \cab{RM} & \cab{Atribuição nesta Sprint} \\
+\midrule
+Gustavo Franzoti Gonçalves & RM566983 & Análise do contexto e mapeamento de
+stakeholders \\
+Lincoln Simão Pereira & RM567284 & Definição da solução, arquitetura
+conceitual e repositório \\
+Maykon Santana Fonseca & RM567041 & Escopo, requisitos iniciais e matriz de
+rastreabilidade \\
+Nicolas Sakaue Nishimura & RM567752 & Protótipo conceitual e fluxo de
+utilização \\
+\bottomrule
+\end{tabularx}
+
+\vspace{12pt}
+\textbf{Repositório do projeto:}
+\texttt{https://github.com/lincoln743/sprint01\_SE}\\[4pt]
+\textbf{Versão deste documento:} 1.0 — 30 de outubro de 2026
+\end{minipage}
+\end{center}
+
+\vfill
+\begin{center}
+{\normalsize SÃO PAULO\\2026\par}
+\end{center}
+\newpage
+
+% =========================================================== SUMÁRIO
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\setcounter{page}{4}
+
+% =========================================================== 1
+\section{INTRODUÇÃO}
+
+\subsection{Apresentação}
+
+A AMAZUL — Amazônia Azul Tecnologias de Defesa S.A. é uma empresa pública
+vinculada ao Ministério da Defesa por meio do Comando da Marinha, criada pela
+Lei n.º 12.706, de 8 de agosto de 2012 (BRASIL, 2012), para desenvolver,
+transferir e manter tecnologias de interesse estratégico nacional —
+especialmente as ligadas ao Programa Nuclear da Marinha e ao Programa de
+Desenvolvimento de Submarinos. Instalações dessa natureza concentram material,
+conhecimento e infraestrutura cujo comprometimento teria consequências que
+excedem em muito o prejuízo patrimonial.
+
+O Sentinela Nuclear Challenge propõe a seguinte pergunta: como utilizar drones,
+sensores, visão computacional e Inteligência Artificial para monitorar,
+inspecionar e identificar situações anômalas em ambientes críticos relacionados
+à segurança física de instalações nucleares?
+
+Este documento é a resposta do Grupo NextGen à Sprint 1 do desafio. Ele não
+trata de implementação: trata de entender o problema, identificar quem é
+afetado por ele, propor uma solução coerente e delimitar com honestidade o que
+essa solução fará e o que não fará.
+
+\subsection{Objetivo do documento}
+
+O objetivo é apresentar a visão inicial do \textbf{ARGOS} — Análise de Risco e
+Guarda Operacional por Sensoriamento —, registrando o problema a ser resolvido,
+os usuários envolvidos, as necessidades identificadas, a proposta de solução da
+equipe, os benefícios esperados e o escopo inicial do sistema, de modo que o
+documento sirva de referência estável para as etapas seguintes de análise,
+modelagem e desenvolvimento.
+
+A escolha do nome tem uma razão: na mitologia grega, Argos Panoptes era o
+guardião de cem olhos, dos quais apenas alguns dormiam por vez. É uma boa
+descrição do que se pretende — vigilância contínua, distribuída e sem ponto
+cego. O acrônimo em português descreve as três funções do sistema: análise de
+risco, guarda operacional e sensoriamento.
+
+\subsection{Organização do documento}
+
+A Seção~\ref{sec:contexto} analisa o contexto e o problema. A
+Seção~\ref{sec:objetivos} declara os objetivos e os indicadores pelos quais a
+solução deverá ser julgada. A Seção~\ref{sec:stakeholders} mapeia os
+envolvidos. A Seção~\ref{sec:solucao} descreve a solução proposta, sua
+arquitetura conceitual, suas funcionalidades, as tecnologias previstas e os
+diferenciais. A Seção~\ref{sec:beneficios} trata dos benefícios esperados e a
+Seção~\ref{sec:escopo}, do escopo — inclusive do que está deliberadamente fora
+dele. A Seção~\ref{sec:prototipo} apresenta o protótipo conceitual de baixa
+fidelidade e a Seção~\ref{sec:conclusao} encerra com os próximos passos. O
+Apêndice~A traz a matriz de rastreabilidade entre necessidades, requisitos e
+benefícios.
+
+\subsection{Método de trabalho}
+
+A equipe seguiu, nesta Sprint, o roteiro proposto na disciplina: compreensão do
+problema a partir do enunciado e da pesquisa documental sobre o domínio;
+identificação dos stakeholders e de suas necessidades; definição da proposta de
+valor; delimitação do escopo; e prototipação conceitual. As decisões de maior
+consequência foram registradas no formato de ADR (\emph{Architecture Decision
+Record}) proposto por Nygard (2011), prática já adotada pelo grupo nos
+artefatos anteriores da disciplina — a Seção~\ref{sec:adr} traz o primeiro
+registro.
+
+Vale um esclarecimento metodológico. O grupo não teve acesso a dados
+operacionais reais de nenhuma instalação da AMAZUL, por razões evidentes de
+segurança. Os números apresentados como linha de base são \emph{estimativas da
+equipe}, construídas a partir de literatura pública e do enunciado do desafio,
+e estão sempre identificados como tal. Nenhum deles deve ser lido como medição.
+
+% =========================================================== 2
+\section{CONTEXTO DO PROBLEMA}
+\label{sec:contexto}
+
+\subsection{O que é segurança física em uma instalação nuclear}
+
+Convém separar dois conceitos que o vocabulário cotidiano confunde. A
+\emph{segurança nuclear} (\emph{safety}) trata de evitar que o processo falhe e
+cause dano — é o domínio dos sistemas de proteção do reator. A \emph{proteção
+física} (\emph{security}) trata de evitar que alguém, deliberadamente, cause
+dano — é o domínio de cercas, controle de acesso, vigilância e resposta. O
+desafio proposto pela AMAZUL situa-se inteiramente no segundo campo.
+
+A norma CNEN NN 2.01 — Proteção Física de Materiais e Instalações Nucleares,
+aprovada pela Resolução CNEN n.º 253/2019 (COMISSÃO NACIONAL DE ENERGIA
+NUCLEAR, 2019) — estabelece os princípios e requisitos para o projeto de um
+Sistema de Proteção Física no Brasil. No plano internacional, a recomendação de
+referência é a INFCIRC/225/Revisão 5, publicada pela Agência Internacional de
+Energia Atômica como Nuclear Security Series n.º 13 (INTERNATIONAL ATOMIC
+ENERGY AGENCY, 2011). Ambas organizam a proteção física em torno de três
+funções encadeadas, que estruturam todo o raciocínio deste documento:
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt,topsep=4pt]
+  \item \textbf{detecção} — perceber que algo anômalo está acontecendo e
+        avaliar o que é;
+  \item \textbf{atraso} — barreiras físicas que aumentam o tempo de que o
+        adversário precisa;
+  \item \textbf{resposta} — interromper a ação dentro do tempo que o atraso
+        concedeu.
+\end{enumerate}
+
+A relação entre as três é aritmética e implacável: a proteção só é efetiva se o
+tempo de detecção somado ao tempo de resposta for menor que o tempo de atraso.
+Barreiras físicas são caras e lentas de modificar; o tempo de resposta depende
+de efetivo e de treinamento. Sobra a detecção — e é exatamente nela que a
+tecnologia proposta pelo desafio pode produzir ganho mensurável e rápido.
+\textbf{Este é o problema que o ARGOS se propõe a atacar: reduzir o tempo entre
+o evento e a sua compreensão pelo operador.}
+
+\subsection{Riscos e situações anômalas consideradas}
+
+A Tabela~\ref{tab:anomalias} relaciona as situações anômalas que o grupo
+considerou plausíveis no recorte de segurança física. A coluna de detecção
+atual descreve o cenário típico de uma instalação equipada com circuito fechado
+de televisão convencional e rondas periódicas.
+
+\begin{table}[H]
+\centering
+\caption{Situações anômalas consideradas no recorte do desafio}
+\label{tab:anomalias}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{3.3cm} X L{3.5cm}}
+\toprule
+\cab{Anomalia} & \cab{Descrição e consequência potencial} & \cab{Como é
+detectada hoje} \\
+\midrule
+Intrusão no perímetro & Pessoa cruza ou tenta cruzar a cerca em ponto não
+vigiado; é o evento inicial de praticamente todo cenário de ameaça &
+Sensor de cerca com alta taxa de alarme falso; confirmação visual depende de o
+operador estar olhando a câmera certa \\
+\addlinespace
+Permanência em área restrita & Pessoa credenciada para uma área é detectada em
+outra, ou permanece além do tempo previsto & Controle de acesso registra a
+entrada, mas não acompanha a permanência \\
+\addlinespace
+Sobrevoo não autorizado & Aeronave não tripulada sobre a instalação, para
+reconhecimento ou transporte de carga & Praticamente não detectada; depende de
+observação casual \\
+\addlinespace
+Veículo em comportamento atípico & Veículo parado junto ao perímetro, em
+circulação fora de rota ou fora de horário & Depende da ronda ou de o operador
+notar a imagem \\
+\addlinespace
+Objeto abandonado & Volume deixado junto a acesso, galpão ou cerca & Depende de
+inspeção visual presencial \\
+\addlinespace
+Violação de barreira ou lacre & Porta, portão, grade ou lacre violado,
+inclusive por ação interna & Verificada em ronda, com atraso de horas \\
+\addlinespace
+Degradação do próprio sistema & Câmera cega, sensor mudo, enlace caído,
+iluminação queimada — a falha silenciosa que anula a detecção & Percebida por
+acaso, às vezes apenas quando se busca a gravação \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026), com base nas funções de proteção física
+descritas na CNEN NN 2.01 (2019) e na INFCIRC/225/Rev.5 (2011).}
+\end{table}
+
+\subsection{Por que o monitoramento convencional não basta}
+
+Três limitações do arranjo convencional explicam por que acrescentar câmeras,
+isoladamente, não resolve o problema.
+
+A primeira é a atenção humana. A literatura de fatores humanos em vigilância é
+consistente ao apontar queda significativa de desempenho na detecção de eventos
+raros após os primeiros vinte a trinta minutos de observação contínua — e a
+operação de monitoramento é, por definição, a espera de um evento raro. Um
+operador responsável por dezenas de câmeras simultâneas não falha por
+descuido; falha porque a tarefa, como desenhada, excede a capacidade atencional
+humana.
+
+A segunda é o volume. Cada câmera acrescentada melhora a cobertura e piora a
+atenção disponível por câmera. Sem triagem automática, ampliar o parque de
+sensores aumenta a quantidade de informação não observada.
+
+A terceira é a natureza do registro. O CFTV convencional é essencialmente
+\emph{forense}: serve para reconstituir o que aconteceu depois que aconteceu.
+A proteção física precisa do oposto — precisa de detecção em tempo útil para
+que a resposta ocorra dentro do tempo de atraso que as barreiras oferecem.
+
+\subsection{Como as tecnologias emergentes mudam esse quadro}
+
+As tecnologias apontadas pelo desafio atacam diretamente as três limitações. A
+\textbf{visão computacional} executa a triagem que o operador não consegue
+sustentar, classificando continuamente cada quadro e chamando a atenção humana
+apenas quando há motivo. O \textbf{processamento na borda} mantém essa triagem
+em milissegundos e junto à fonte, sem depender de enlace com um centro de dados
+externo — o que, além de mais rápido, é mais adequado a um ambiente em que o
+tráfego de imagens para fora da instalação é indesejável. Os \textbf{sensores
+IoT} cobrem o que a câmera não vê: vibração na cerca, abertura de porta,
+presença em duto, condição ambiental. Os \textbf{drones autônomos} transformam
+a inspeção, hoje presencial e periódica, em verificação sob demanda, levando um
+sensor móvel ao ponto exato do alerta em segundos. A \textbf{Inteligência
+Artificial} correlaciona essas fontes: um sensor de cerca disparando sozinho é
+ruído, mas o mesmo sensor acompanhado de detecção humana no vídeo e de nenhuma
+credencial registrada naquele setor é um evento de risco alto. E a
+\textbf{geolocalização com painel operacional} entrega essa conclusão em forma
+de ação, no mapa, com o contexto necessário para decidir.
+
+\subsection{Impacto esperado na operação}
+
+O impacto pretendido não é substituir o operador: é mudar a natureza do seu
+trabalho. Em vez de vigiar continuamente dezenas de imagens à espera de algo,
+ele passa a julgar um pequeno número de eventos já triados, com contexto
+reunido e recomendação de ação. A decisão permanece humana — e, em um domínio
+regulado como este, deve permanecer —, mas deixa de depender de atenção
+sustentada por turnos inteiros.
+
+% =========================================================== 3
+\section{OBJETIVOS DA SOLUÇÃO}
+\label{sec:objetivos}
+
+\subsection{Objetivo geral}
+
+Reduzir o tempo entre a ocorrência de uma situação anômala na área física de
+uma instalação crítica e a sua compreensão pelo operador, por meio de um
+sistema que integre sensores, câmeras com visão computacional, drones
+autônomos e correlação por Inteligência Artificial em um único painel
+operacional, mantendo a decisão final sob responsabilidade humana e a trilha
+de cada evento auditável.
+
+\subsection{Objetivos específicos}
+
+\begin{enumerate}[label=\textbf{OE-\arabic*},leftmargin=*,itemsep=3pt,topsep=4pt]
+  \item detectar automaticamente intrusão, permanência indevida, objeto
+        abandonado, sobrevoo não autorizado e violação de barreira, a partir da
+        fusão de múltiplas fontes;
+  \item classificar cada detecção em um nível de severidade, de modo que a fila
+        do operador seja ordenada por risco e não por ordem de chegada;
+  \item reduzir o volume de alarmes falsos que chegam ao operador, aproveitando
+        a correlação entre fontes independentes;
+  \item permitir a verificação remota de um alerta em segundos, despachando um
+        drone à coordenada em vez de deslocar uma equipe;
+  \item apresentar, em um único painel, a posição geográfica, a imagem, a
+        trilha do evento e as ações disponíveis;
+  \item registrar toda ocorrência e toda ação do operador em trilha imutável,
+        apta a compor evidência para auditoria e para o órgão regulador;
+  \item monitorar a saúde do próprio sistema, tratando sensor mudo e câmera
+        cega como eventos de segurança, não como mera falha de manutenção.
+\end{enumerate}
+
+\subsection{Indicadores de sucesso}
+
+A Tabela~\ref{tab:indicadores} declara como a equipe pretende julgar a solução.
+Reitere-se que a coluna de linha de base é estimativa, não medição: ela existe
+para tornar a meta falsificável, e deverá ser substituída por valores reais
+assim que houver acesso a dados de operação.
+
+\begin{table}[H]
+\centering
+\caption{Indicadores de sucesso propostos para o ARGOS}
+\label{tab:indicadores}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{4.4cm} X L{2.6cm} L{2.0cm}}
+\toprule
+\cab{Indicador} & \cab{O que mede} & \cab{Linha de base estimada} & \cab{Meta} \\
+\midrule
+Tempo até a detecção & Do instante do evento até o alerta no painel & 3 a 10
+min (ronda ou acaso) & abaixo de 60 s \\
+Tempo até a verificação & Do alerta até a confirmação visual do que ocorre &
+10 a 20 min (deslocamento) & abaixo de 3 min \\
+Taxa de alarme falso & Proporção de alertas descartados pelo operador & acima
+de 50 \% (sensor isolado) & abaixo de 15 \% \\
+Cobertura do perímetro & Extensão com detecção automática ativa & parcial, só
+onde há câmera observada & 100 \% do perímetro \\
+Disponibilidade do sistema & Tempo em que a detecção opera plenamente & não
+medida & 99,5 \% mensal \\
+Rastreabilidade & Ocorrências com trilha completa e exportável & registro
+manual em livro & 100 \% \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026). Linha de base estimada pela equipe, a
+ser substituída por medição.}
+\end{table}
+
+% =========================================================== 4
+\section{STAKEHOLDERS}
+\label{sec:stakeholders}
+
+\subsection{Mapa dos envolvidos}
+
+A Tabela~\ref{tab:stakeholders} relaciona os envolvidos, o papel de cada um e,
+principalmente, o que cada um precisa do sistema — porque é dessa necessidade,
+e não da tecnologia disponível, que os requisitos devem derivar.
+
+\begin{table}[H]
+\centering
+\caption{Stakeholders do ARGOS, papéis e necessidades}
+\label{tab:stakeholders}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{3.4cm} L{4.3cm} X}
+\toprule
+\cab{Stakeholder} & \cab{Papel} & \cab{Principal necessidade em relação ao
+sistema} \\
+\midrule
+Operador de monitoramento & Acompanha o painel em turno contínuo e é o primeiro
+a julgar cada evento & Receber poucos alertas, confiáveis e com contexto
+suficiente para decidir em segundos — e não ser inundado por alarme falso \\
+\addlinespace
+Equipe de segurança física & Atende a ocorrência em campo & Saber exatamente
+para onde ir, o que esperar encontrar e com que grau de confiança, antes de
+chegar \\
+\addlinespace
+Equipe de inspeção e manutenção & Executa inspeções programadas e verifica
+ativos & Substituir parte da inspeção presencial por inspeção aérea registrada,
+com histórico comparável entre períodos \\
+\addlinespace
+Gestor da instalação & Responde pela segurança física perante a direção e os
+órgãos externos & Indicadores confiáveis, evidência de conformidade e visão
+consolidada do risco \\
+\addlinespace
+Coordenador do centro de operações & Dimensiona turnos e define procedimentos &
+Entender a carga real de eventos para distribuir efetivo e padronizar a
+resposta \\
+\addlinespace
+Administrador do sistema & Cadastra sensores, rotas, perfis e políticas de
+severidade & Configurar sem depender do fornecedor e controlar quem vê e quem
+age \\
+\addlinespace
+Órgãos reguladores (CNEN e, no plano internacional, AIEA) & Fiscalizam o
+atendimento aos requisitos de proteção física & Registro íntegro, rastreável e
+exportável das ocorrências e das respostas \\
+\addlinespace
+Área de TI e segurança da informação & Responde pela infraestrutura e pela
+proteção dos dados & Arquitetura que não exponha imagem nem dado sensível e que
+se integre ao ambiente existente \\
+\addlinespace
+Alta direção da AMAZUL e Comando da Marinha & Patrocina e prioriza o
+investimento & Demonstração de ganho operacional e de aderência à missão
+institucional \\
+\addlinespace
+Fornecedores de sensores e drones & Entregam e mantêm o hardware & Interfaces
+abertas e documentadas, para não haver dependência de um único fabricante \\
+\addlinespace
+Comunidade do entorno e imprensa & Afetadas pela percepção de segurança da
+instalação & Transparência sobre o que é monitorado e sobre o tratamento de
+imagens \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026).}
+\end{table}
+
+\subsection{Priorização por influência e interesse}
+
+Nem todos os envolvidos pesam igualmente nas decisões de projeto. A
+Figura~\ref{fig:stakeholders} posiciona cada um segundo a influência que exerce
+sobre o projeto e o interesse que tem no seu resultado, o que orienta a
+estratégia de envolvimento de cada grupo nas próximas Sprints.
+
+\begin{figure}[H]
+\centering
+\caption{Matriz de influência e interesse dos stakeholders}
+\label{fig:stakeholders}
+\includegraphics[width=0.96\textwidth]{fig_stakeholders.png}
+\fonte{elaborado pelos autores (2026).}
+\end{figure}
+
+Duas leituras dessa matriz orientaram o restante do documento. A primeira: o
+operador de monitoramento tem interesse altíssimo e influência formal baixa —
+é quem mais sofrerá o efeito do sistema e quem menos participa das decisões de
+compra. A equipe tratou esse desequilíbrio como risco de projeto e colocou o
+operador no centro do protótipo da Seção~\ref{sec:prototipo}. A segunda: os
+órgãos reguladores têm influência alta e interesse concentrado em um aspecto
+específico — a evidência. Por isso a trilha de auditoria aparece como requisito
+desde a Sprint 1, e não como funcionalidade a ser acrescentada no fim.
+
+% =========================================================== 5
+\section{DESCRIÇÃO DA SOLUÇÃO PROPOSTA}
+\label{sec:solucao}
+
+\subsection{Declaração de visão do produto}
+
+\begin{quote}
+\singlespacing\small
+\textbf{Para} operadores de monitoramento e equipes de segurança física de
+instalações críticas, \textbf{que} precisam perceber e compreender situações
+anômalas em tempo útil de resposta, \textbf{o ARGOS é} uma plataforma de
+vigilância integrada \textbf{que} reúne sensores, câmeras com visão
+computacional e drones autônomos, correlaciona essas fontes por Inteligência
+Artificial e entrega ao operador eventos já triados, classificados por risco e
+georreferenciados. \textbf{Diferentemente} do circuito fechado de televisão
+convencional, que registra para consulta posterior e depende da atenção
+contínua de quem observa, \textbf{o ARGOS} dirige a atenção humana ao que
+importa, permite verificar remotamente antes de deslocar pessoas e mantém de
+cada decisão uma trilha auditável.
+\end{quote}
+
+\subsection{Arquitetura conceitual}
+
+A Figura~\ref{fig:camadas} organiza a solução em três camadas e explicita o
+percurso que o desafio enuncia: transformar dados em informação, informação em
+inteligência e inteligência em ação.
+
+\begin{figure}[H]
+\centering
+\caption{Arquitetura conceitual do ARGOS em três camadas}
+\label{fig:camadas}
+\includegraphics[width=\textwidth]{fig_camadas.png}
+\fonte{elaborado pelos autores (2026).}
+\end{figure}
+
+A Figura~\ref{fig:contexto} apresenta a mesma solução pela ótica do contexto —
+quem a usa e com que sistemas ela conversa. A notação segue o nível 1 do modelo
+C4, adotado pelo grupo nos artefatos anteriores da disciplina; o detalhamento
+em contêineres e componentes será produzido na Sprint 2, quando a arquitetura
+tiver sido decidida.
+
+\begin{figure}[H]
+\centering
+\caption{Diagrama de contexto do ARGOS (C4 — nível 1)}
+\label{fig:contexto}
+\includegraphics[width=\textwidth]{fig_contexto.png}
+\fonte{elaborado pelos autores (2026).}
+\end{figure}
+
+\subsection{Principais funcionalidades}
+
+A Tabela~\ref{tab:rf} lista as funcionalidades previstas, priorizadas pelo
+método MoSCoW: \emph{essencial} para o que o sistema não pode deixar de fazer,
+\emph{importante} para o que agrega valor relevante e \emph{desejável} para o
+que pode ser postergado sem comprometer a proposta.
+
+\begin{table}[H]
+\centering
+\caption{Funcionalidades previstas para o ARGOS}
+\label{tab:rf}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{1.5cm} L{4.0cm} X L{2.2cm}}
+\toprule
+\cab{Código} & \cab{Funcionalidade} & \cab{Descrição} & \cab{Prioridade} \\
+\midrule
+RF-01 & Ingestão de sensores & Receber e normalizar eventos de sensores de
+cerca, portas, movimento e condições ambientais & Essencial \\
+RF-02 & Detecção por visão computacional & Classificar quadros das câmeras e
+identificar pessoa, veículo e objeto abandonado & Essencial \\
+RF-03 & Correlação de eventos & Cruzar fontes independentes e atribuir
+pontuação de risco ao evento resultante & Essencial \\
+RF-04 & Classificação de severidade & Aplicar política configurável que traduz
+a pontuação em severidade alta, média ou baixa & Essencial \\
+RF-05 & Painel operacional & Exibir mapa da instalação, fila de alertas e
+indicadores em tempo real & Essencial \\
+RF-06 & Verificação assistida & Reunir vídeo, trilha do evento, dados do
+contexto e ações em uma única tela & Essencial \\
+RF-07 & Registro de ocorrência & Registrar ocorrência com classificação,
+evidências e ações, em trilha imutável & Essencial \\
+RF-08 & Despacho de drone & Enviar drone à coordenada do alerta e transmitir
+imagem ao vivo ao operador & Importante \\
+RF-09 & Inspeção programada & Executar rotas periódicas de inspeção aérea e
+gerar relatório comparável entre execuções & Importante \\
+RF-10 & Monitoração da saúde do sistema & Detectar sensor mudo, câmera cega e
+enlace caído, tratando-os como evento de segurança & Importante \\
+RF-11 & Indicadores e relatórios & Consolidar indicadores operacionais e
+exportar evidência para auditoria & Importante \\
+RF-12 & Administração & Cadastrar sensores, rotas, perfis de acesso e políticas
+de severidade & Importante \\
+RF-13 & Realimentação do modelo & Registrar a classificação do operador e usá-la
+para reduzir o falso positivo ao longo do tempo & Desejável \\
+RF-14 & Detecção de sobrevoo não autorizado & Identificar aeronave não
+tripulada no espaço aéreo da instalação & Desejável \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026).}
+\end{table}
+
+\subsection{Casos de uso principais}
+
+A Figura~\ref{fig:casos} apresenta a visão preliminar dos casos de uso,
+suficiente para delimitar o sistema nesta Sprint. Note-se que \emph{verificar
+ocorrência com drone} e \emph{registrar e classificar a ocorrência} são
+incluídos pelo caso \emph{receber e triar alerta}: a verificação e o registro
+não são passos opcionais, e sim partes constitutivas do tratamento de um
+alerta — decisão de projeto análoga à adotada pelo grupo no artefato de padrões
+de projeto da disciplina.
+
+\begin{figure}[H]
+\centering
+\caption{Casos de uso preliminares do ARGOS}
+\label{fig:casos}
+\includegraphics[width=\textwidth]{fig_casos_uso.png}
+\fonte{elaborado pelos autores (2026).}
+\end{figure}
+
+\subsection{Tecnologias previstas}
+
+A Tabela~\ref{tab:tecnologias} apresenta as tecnologias candidatas. Trata-se de
+previsão, não de decisão: a escolha definitiva depende de avaliação técnica nas
+próximas Sprints, e o documento registra o papel de cada uma para que a
+discussão futura parta de um critério, e não de preferência.
+
+\begin{table}[H]
+\centering
+\caption{Tecnologias candidatas por camada}
+\label{tab:tecnologias}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{2.4cm} L{4.2cm} X}
+\toprule
+\cab{Camada} & \cab{Tecnologia candidata} & \cab{Papel e justificativa} \\
+\midrule
+Borda & Computador de borda com acelerador de inferência & Executar a detecção
+junto à câmera, em milissegundos, sem depender de enlace externo \\
+Borda & Modelos de detecção de objetos em tempo real & Identificar pessoa,
+veículo e objeto; são modelos maduros, com custo computacional compatível com
+a borda \\
+Borda & Drones com voo autônomo por rota e câmera estabilizada & Levar um
+sensor móvel ao ponto do alerta e executar inspeções programadas \\
+Borda & Sensores IoT com protocolo de baixo consumo & Cobrir cerca, portas,
+dutos e ambiente onde não há câmera \\
+Plataforma & Fila de mensagens e processamento de eventos & Desacoplar a
+captação do processamento e absorver picos sem perder evento \\
+Plataforma & Mecanismo de regras e correlação com modelos de IA & Transformar
+detecções isoladas em evento com pontuação de risco \\
+Plataforma & Banco relacional com extensão geoespacial & Guardar ocorrências,
+rotas e posições, com consulta por área \\
+Plataforma & Armazenamento de objetos com retenção imutável & Preservar vídeo
+e evidência sem possibilidade de alteração \\
+Apresentação & Aplicação web com mapa interativo & Entregar o painel
+operacional em qualquer estação do centro de operações \\
+Apresentação & Serviço de notificação & Alcançar equipes em campo por
+dispositivo móvel \\
+Transversal & Autenticação forte com perfis e trilha de auditoria & Garantir
+que cada ação tenha autor identificado e registro \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026).}
+\end{table}
+
+\subsection{Diferenciais da proposta}
+
+Quatro diferenciais distinguem o ARGOS de um conjunto de câmeras com análise de
+vídeo.
+
+O primeiro é a \textbf{correlação entre fontes independentes}. Um sensor de
+cerca que dispara sozinho em dia de vento é ruído; o mesmo sensor acompanhado
+de detecção humana no vídeo, em setor sem credencial ativa, é evento de risco
+alto. É a combinação que carrega a informação, e é por isso que o sistema é
+integrado em vez de ser um conjunto de detectores paralelos.
+
+O segundo é o \textbf{drone como instrumento de verificação, e não apenas de
+patrulha}. A inspeção aérea programada tem valor, mas o ganho maior está em
+responder a um alerta específico levando um sensor móvel à coordenada em
+segundos — o que transforma uma dúvida de vinte minutos em uma confirmação de
+dois.
+
+O terceiro é tratar a \textbf{degradação do próprio sistema como evento de
+segurança}. Uma câmera cega não é um chamado de manutenção: é um ponto cego de
+detecção, e deve chegar ao operador com a mesma clareza de um alerta de
+intrusão. Essa inversão é incomum e barata de implementar.
+
+O quarto é a \textbf{evidência como requisito de origem}. Por operar em
+ambiente regulado, o sistema nasce com trilha imutável de ocorrências e ações,
+em vez de ganhar um módulo de auditoria depois — decisão que a experiência do
+grupo em artefatos anteriores mostrou ser muito mais cara quando postergada.
+
+\subsection{Premissas, restrições e riscos}
+
+A Tabela~\ref{tab:riscos} registra as condições sob as quais a proposta se
+sustenta e os riscos que a equipe já identifica. Registrá-los na Sprint 1 é
+parte do trabalho: proposta sem restrição declarada costuma ser proposta mal
+compreendida.
+
+\begin{table}[H]
+\centering
+\caption{Premissas, restrições e riscos identificados}
+\label{tab:riscos}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{2.0cm} L{4.4cm} X}
+\toprule
+\cab{Tipo} & \cab{Descrição} & \cab{Tratamento previsto} \\
+\midrule
+Premissa & A instalação já dispõe de perímetro físico, controle de acesso e
+CFTV & O ARGOS integra o que existe; não substitui barreira física \\
+Premissa & Há equipe de resposta disponível em turno & Sem resposta, detecção
+mais rápida não produz proteção \\
+Restrição & Operação de drone sujeita à regulamentação aeronáutica: RBAC-E 100,
+da ANAC, que substituiu o RBAC-E 94, e ICA 100-40, do DECEA & Rotas, altitudes
+e autorizações tratadas como requisito, não como detalhe de operação; voos além
+da linha de visada exigem requisitos mais rigorosos \\
+Restrição & Tratamento de imagem de pessoas sujeito à LGPD — Lei n.º 13.709/2018
+—, que classifica dado biométrico como dado pessoal sensível & Minimização,
+retenção definida, controle de acesso por perfil e registro de quem acessou \\
+Restrição & Ambiente de defesa restringe tráfego de dados para fora da
+instalação & Processamento na borda e plataforma hospedada internamente \\
+Restrição & Requisitos de proteção física definidos pela CNEN NN 2.01 & O
+sistema apoia o Sistema de Proteção Física existente, sem substituí-lo \\
+Risco & Falso positivo excessivo levar o operador a ignorar alertas & Correlação
+entre fontes, política de severidade e realimentação pela classificação do
+operador \\
+Risco & Dependência de um único fornecedor de hardware & Interfaces abertas e
+camada de adaptação por tipo de sensor \\
+Risco & Expectativa de autonomia total da IA & O documento afirma, e o produto
+reforça, que a decisão é humana e assistida \\
+Risco & Indisponibilidade de dados reais para treinar e avaliar os modelos &
+Uso inicial de conjuntos públicos e de dados sintéticos, com reavaliação quando
+houver acesso \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026).}
+\end{table}
+
+\subsection{Registro de decisão arquitetural}
+\label{sec:adr}
+
+A Tabela~\ref{tab:adr} registra, no modelo de Nygard (2011), a primeira decisão
+de consequência tomada pela equipe. Registrá-la agora evita que ela seja
+revisitada por esquecimento nas Sprints seguintes.
+
+\begin{table}[H]
+\centering
+\caption{ADR-001 — Processamento de visão computacional na borda}
+\label{tab:adr}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{3.2cm} X}
+\toprule
+\cab{Identificador} & ADR-001 — Executar a detecção por visão computacional na
+borda, junto à câmera \\
+\midrule
+Status & Aceita, na Sprint 1, como decisão preliminar de visão \\
+Contexto & O sistema precisa detectar eventos em segundos; o ambiente é de
+defesa, com restrição ao tráfego de imagens para fora da instalação; o enlace
+entre pontos do perímetro pode ser instável; e o volume bruto de vídeo de
+dezenas de câmeras é grande demais para ser transportado continuamente \\
+Decisão & Executar a inferência de detecção em dispositivos de borda junto às
+câmeras e aos drones, transmitindo à plataforma central apenas eventos
+estruturados e os trechos de vídeo associados \\
+Consequências positivas & Latência compatível com a meta de detecção abaixo de
+60 s; menor consumo de enlace; menor exposição de imagem; detecção continua
+operando se a plataforma central ficar indisponível \\
+Consequências negativas & Maior custo de hardware por ponto; atualização de
+modelo passa a ser um problema de distribuição em campo; capacidade de
+processamento limitada restringe o tamanho dos modelos \\
+Alternativas consideradas & Processamento centralizado na instalação,
+descartado pela latência e pelo consumo de enlace; processamento em nuvem
+pública, descartado pela restrição de tráfego de dados sensíveis em ambiente de
+defesa \\
+Gatilho de revisão & A decisão deve ser revisitada se a instalação passar a
+dispor de rede interna de alta capacidade com baixa latência, ou se os modelos
+exigidos ultrapassarem a capacidade dos dispositivos de borda \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026), conforme o modelo de Nygard (2011).}
+\end{table}
+
+% =========================================================== 6
+\section{BENEFÍCIOS ESPERADOS}
+\label{sec:beneficios}
+
+Os benefícios foram organizados em três grupos — operacionais, de segurança e
+de conformidade —, cada um associado a um indicador verificável. A
+Tabela~\ref{tab:beneficios} evita a formulação genérica (``mais segurança'',
+``mais eficiência'') em favor de afirmações que podem ser confirmadas ou
+desmentidas por medição.
+
+\begin{table}[H]
+\centering
+\caption{Benefícios esperados e como serão verificados}
+\label{tab:beneficios}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{2.0cm} L{4.6cm} X}
+\toprule
+\cab{Grupo} & \cab{Benefício} & \cab{Como será verificado} \\
+\midrule
+Operacional & Atenção do operador dirigida ao que importa & Número de eventos
+efetivamente julgados por turno e proporção de alertas descartados \\
+Operacional & Verificação remota antes do deslocamento & Proporção de alertas
+resolvidos sem envio de equipe e tempo médio até a confirmação visual \\
+Operacional & Inspeção programada sem interromper a operação & Número de
+inspeções executadas por período e horas de deslocamento evitadas \\
+Segurança & Redução do tempo entre evento e compreensão & Tempo até a detecção,
+comparado à linha de base após a implantação \\
+Segurança & Cobertura contínua, inclusive onde não há câmera & Extensão do
+perímetro com detecção automática ativa \\
+Segurança & Ponto cego deixa de passar despercebido & Tempo médio entre a falha
+de um sensor e o seu registro como evento \\
+Conformidade & Evidência pronta para auditoria & Proporção de ocorrências com
+trilha completa e tempo para produzir um relatório ao regulador \\
+Conformidade & Tratamento de imagem com controle & Registro de acesso às
+imagens e aderência à política de retenção \\
+Institucional & Base replicável para outras instalações críticas & Esforço de
+implantação em uma segunda instalação, comparado ao da primeira \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026).}
+\end{table}
+
+Um benefício merece registro em separado, por ser o menos visível. Ao obrigar o
+operador a classificar cada alerta — confirmado ou falso positivo, e por qual
+motivo —, o sistema produz, como subproduto da operação diária, um conjunto de
+dados rotulados sobre o que de fato acontece naquela instalação. Esse acervo é
+o que permite reduzir o falso positivo ao longo do tempo e, mais do que isso, é
+conhecimento que hoje se perde na memória de quem estava no turno.
+
+% =========================================================== 7
+\section{ESCOPO}
+\label{sec:escopo}
+
+\subsection{Dentro do escopo}
+
+A proposta da Sprint 1 compreende, como escopo do sistema:
+
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=4pt]
+  \item monitorar o perímetro e as áreas restritas por meio de sensores,
+        câmeras com visão computacional e drones;
+  \item detectar intrusão, permanência indevida, objeto abandonado e violação
+        de barreira;
+  \item correlacionar fontes independentes e atribuir severidade ao evento;
+  \item gerar alertas automáticos e ordená-los por risco na fila do operador;
+  \item exibir a situação em painel operacional com mapa, vídeo e indicadores;
+  \item despachar drone para verificação remota de um alerta e transmitir a
+        imagem ao operador;
+  \item executar rotas de inspeção programadas e registrar o resultado;
+  \item registrar ocorrências, ações e evidências em trilha auditável;
+  \item monitorar a saúde dos próprios sensores, câmeras e enlaces;
+  \item administrar sensores, rotas, perfis de acesso e políticas de
+        severidade.
+\end{itemize}
+
+\subsection{Fora do escopo}
+
+Delimitar o que não será feito é parte do trabalho desta Sprint: proposta que
+promete tudo não é ambiciosa, é imprecisa. A Tabela~\ref{tab:fora} registra as
+exclusões e, principalmente, a razão de cada uma.
+
+\begin{table}[H]
+\centering
+\caption{Itens deliberadamente fora do escopo}
+\label{tab:fora}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{5.0cm} X}
+\toprule
+\cab{Fora do escopo} & \cab{Por quê} \\
+\midrule
+Monitoração de segurança nuclear do processo (\emph{safety}): reator,
+refrigeração, barreiras de contenção & Domínio distinto, com sistemas
+dedicados, redundantes e certificados; o ARGOS trata de proteção física
+(\emph{security}) \\
+Resposta automática sem intervenção humana — travar portas, acionar sirene,
+despachar equipe sem confirmação & A decisão deve permanecer humana em ambiente
+regulado; o sistema recomenda e registra, não decide \\
+Identificação biométrica de pessoas e reconhecimento facial & Risco
+desproporcional em relação ao benefício no recorte tratado, e tratamento de dado
+pessoal sensível sob a LGPD; o sistema detecta presença humana, não identidade \\
+Substituição do sistema de controle de acesso existente & O ARGOS consome a
+informação de credenciais; não gerencia credenciamento \\
+Contramedidas ativas contra drones intrusos (interferência, captura, abate) &
+Atividade regulada e restrita a autoridade competente \\
+Fabricação de hardware (drones, sensores, câmeras) & O projeto integra
+equipamento de mercado por interfaces abertas \\
+Operação em instalações não nucleares & Possível no futuro; manter o foco é o
+que torna a Sprint executável \\
+Aplicativo móvel completo para o público externo & Fora do recorte do centro de
+operações nesta etapa \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026).}
+\end{table}
+
+\subsection{Requisitos não funcionais iniciais}
+
+Os requisitos da Tabela~\ref{tab:rnf} serão detalhados nas próximas Sprints,
+mas já condicionam decisões de arquitetura e por isso são declarados agora.
+
+\begin{table}[H]
+\centering
+\caption{Requisitos não funcionais iniciais}
+\label{tab:rnf}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{L{1.6cm} L{3.4cm} X}
+\toprule
+\cab{Código} & \cab{Atributo} & \cab{Requisito} \\
+\midrule
+RNF-01 & Desempenho & Do evento ao alerta no painel em menos de 60 s, no
+percentil 95 \\
+RNF-02 & Desempenho & Inferência na borda concluída em menos de 200 ms por
+quadro analisado \\
+RNF-03 & Disponibilidade & Disponibilidade mensal de 99,5 \% da função de
+detecção \\
+RNF-04 & Resiliência & A detecção na borda continua operando por no mínimo 4 h
+sem conexão com a plataforma central \\
+RNF-05 & Segurança & Autenticação forte, perfis de acesso e registro de toda
+ação do operador \\
+RNF-06 & Auditabilidade & Trilha de ocorrências imutável e exportável em
+formato aberto \\
+RNF-07 & Privacidade & Retenção definida por política, com minimização e
+registro de acesso às imagens \\
+RNF-08 & Interoperabilidade & Integração por interfaces abertas com CFTV,
+controle de acesso e sensores de diferentes fabricantes \\
+RNF-09 & Usabilidade & Alerta compreendido e julgado em até 30 s por operador
+treinado, sem sair da tela de verificação \\
+RNF-10 & Escalabilidade & Crescimento do parque de sensores sem reprojeto da
+plataforma \\
+RNF-11 & Conformidade & Aderência à CNEN NN 2.01, à LGPD e à regulamentação
+aeronáutica aplicável à operação dos drones \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026).}
+\end{table}
+
+\subsection{Critérios de aceitação desta Sprint}
+
+Em coerência com a prática de Definição de Pronto adotada pelo grupo na
+disciplina, a Sprint 1 é considerada concluída quando: o problema estiver
+descrito com as situações anômalas identificadas; os stakeholders estiverem
+mapeados com papel e necessidade; a solução tiver nome, funcionalidades,
+tecnologias e diferenciais declarados; o escopo estiver delimitado nos dois
+sentidos; houver protótipo conceitual cobrindo tela principal, fluxo e
+funcionalidades; e o documento estiver versionado no repositório do projeto.
+Todos os itens foram cumpridos nesta entrega.
+
+% =========================================================== 8
+\section{PROTÓTIPO CONCEITUAL}
+\label{sec:prototipo}
+
+O protótipo é de baixa fidelidade e tem finalidade exclusivamente conceitual:
+serve para verificar se o fluxo de trabalho proposto faz sentido para quem
+operará o sistema, e não para definir acabamento visual, paleta ou tipografia.
+As telas foram desenhadas a partir da pergunta que o operador faz em cada
+momento, e não a partir das funcionalidades disponíveis.
+
+\subsection{Fluxo geral de utilização}
+
+A Figura~\ref{fig:fluxo} apresenta o fluxo completo, do evento captado até o
+registro da ocorrência, incluindo o caminho do falso positivo — que não é um
+desvio do processo, e sim parte dele: é o que realimenta o modelo.
+
+\begin{figure}[H]
+\centering
+\caption{Fluxo geral de utilização do ARGOS}
+\label{fig:fluxo}
+\includegraphics[width=\textwidth]{fig_fluxo.png}
+\fonte{elaborado pelos autores (2026).}
+\end{figure}
+
+\subsection{Tela principal — painel operacional}
+
+A tela da Figura~\ref{fig:painel} responde à pergunta ``o que está acontecendo
+agora?''. Ela reúne o mapa da instalação com a posição dos sensores, das
+câmeras e dos drones, a fila de alertas ordenada por severidade, os indicadores
+do turno e o histórico recente. Cada alerta traz, desde a fila, as duas ações
+mais prováveis — verificar e despachar —, para que o operador não precise
+navegar antes de agir.
+
+\begin{figure}[H]
+\centering
+\caption{Protótipo conceitual — painel operacional}
+\label{fig:painel}
+\includegraphics[width=\textwidth]{fig_tela_painel.png}
+\fonte{elaborado pelos autores (2026).}
+\end{figure}
+
+\subsection{Tela de verificação da ocorrência}
+
+A tela da Figura~\ref{fig:ocorrencia} responde a ``o que é isto, exatamente?''.
+Reúne em uma única visão o quadro de vídeo com as detecções do modelo e seus
+graus de confiança, a linha do tempo do evento, o contexto que sustenta a
+classificação de risco — inclusive a ausência de credencial registrada no setor
+— e as quatro ações possíveis. A exibição do grau de confiança é deliberada: o
+operador precisa saber o quanto o modelo está certo para decidir quanto peso
+dar a ele.
+
+\begin{figure}[H]
+\centering
+\caption{Protótipo conceitual — verificação da ocorrência}
+\label{fig:ocorrencia}
+\includegraphics[width=\textwidth]{fig_tela_ocorrencia.png}
+\fonte{elaborado pelos autores (2026).}
+\end{figure}
+
+\subsection{Tela de inspeção aérea}
+
+A tela da Figura~\ref{fig:inspecao} responde a ``o que o drone está vendo?''.
+Apresenta a rota com os pontos de passagem, a posição atual da aeronave, a
+telemetria necessária para decidir se a missão pode continuar e a transmissão
+ao vivo. O \emph{checklist} da missão aparece na própria tela porque a
+liberação do espaço aéreo é condição de partida, e não formalidade: a
+operação está sujeita à regulamentação da ANAC e do DECEA, conforme registrado
+na Tabela~\ref{tab:riscos}.
+
+\begin{figure}[H]
+\centering
+\caption{Protótipo conceitual — inspeção aérea por drone}
+\label{fig:inspecao}
+\includegraphics[width=\textwidth]{fig_tela_inspecao.png}
+\fonte{elaborado pelos autores (2026).}
+\end{figure}
+
+\subsection{Observações sobre o protótipo}
+
+Três escolhas do protótipo expressam decisões de projeto e não preferências
+estéticas. A primeira: a fila de alertas é curta e ordenada por severidade,
+porque uma lista longa reproduz, na tela, o mesmo problema de atenção que o
+sistema pretende resolver. A segunda: o botão de classificar como falso
+positivo tem a mesma proeminência dos demais, porque o registro do erro é tão
+valioso quanto o do acerto. A terceira: nenhuma tela executa ação irreversível
+sem confirmação explícita do operador, coerentemente com a decisão de manter a
+autonomia do sistema limitada à recomendação.
+
+% =========================================================== 9
+\section{CONCLUSÃO}
+\label{sec:conclusao}
+
+A Sprint 1 cumpriu o que se propôs: compreender o problema antes de desenhar a
+solução. O exercício mostrou que o desafio proposto pela AMAZUL, apesar de
+enunciado em termos de tecnologias — drones, sensores, visão computacional,
+Inteligência Artificial —, é, no fundo, um problema de tempo e de atenção. A
+proteção física só é efetiva se a detecção somada à resposta couber dentro do
+tempo que as barreiras físicas concedem, e o elo frágil dessa cadeia, hoje, é a
+detecção dependente de atenção humana sustentada.
+
+Daí decorre a proposta. O ARGOS não é um conjunto de câmeras inteligentes: é
+uma camada de correlação que transforma detecções isoladas em eventos
+classificados por risco, acrescenta ao operador a capacidade de verificar
+remotamente antes de deslocar pessoas e preserva de cada decisão uma trilha
+auditável. As três decisões mais importantes da Sprint foram, por isso,
+decisões de limite: manter a decisão final sob responsabilidade humana, excluir
+a identificação biométrica do escopo e tratar a degradação do próprio sistema
+como evento de segurança.
+
+Registre-se também o que esta Sprint \emph{não} produziu. Não há arquitetura
+decidida, não há modelo de dados, não há avaliação de viabilidade de hardware e
+não há validação com usuários reais — e os números de linha de base são
+estimativas da equipe, não medições. Apresentar qualquer uma dessas lacunas
+como resolvida comprometeria o valor do documento como base para as etapas
+seguintes.
+
+Os próximos passos previstos são: detalhar os casos de uso com fluxos principal
+e alternativos; produzir o modelo de domínio e os diagramas de contêineres e de
+componentes; avaliar a viabilidade técnica dos modelos de visão computacional
+na borda; especificar as interfaces de integração com CFTV, controle de acesso
+e sensores; e validar o protótipo com usuários que exerçam, na prática, o papel
+de operador de monitoramento. A arquitetura, a modelagem e o plano de testes
+decorrentes serão objeto das Sprints seguintes.
+
+% =========================================================== REFERÊNCIAS
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{REFERÊNCIAS}
+\section*{REFERÊNCIAS}
+\vspace{0.6\baselineskip}
+
+{\singlespacing\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.7\baselineskip}
+
+AGÊNCIA NACIONAL DE AVIAÇÃO CIVIL. \textbf{RBAC-E n.º 100}: regulamento
+brasileiro da aviação civil especial — aeronaves não tripuladas. Brasília:
+ANAC, 2026. Regulamento que substitui o RBAC-E n.º 94 e adota classificação por
+risco operacional.
+
+ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. \textbf{NBR 14724}: informação e
+documentação: trabalhos acadêmicos: apresentação. Rio de Janeiro, 2011.
+
+ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. \textbf{NBR 6023}: informação e
+documentação: referências: elaboração. Rio de Janeiro, 2018.
+
+BRASIL. \textbf{Lei n.º 12.706, de 8 de agosto de 2012}. Autoriza o Poder
+Executivo a criar a empresa pública Amazônia Azul Tecnologias de Defesa S.A. —
+AMAZUL. Brasília: Presidência da República, 2012. Disponível em:
+https://www.planalto.gov.br/ccivil\_03/\_ato2011-2014/2012/lei/L12706.htm.
+Acesso em: 30 out.\ 2026.
+
+BRASIL. \textbf{Lei n.º 13.709, de 14 de agosto de 2018}. Lei Geral de Proteção
+de Dados Pessoais (LGPD). Brasília: Presidência da República, 2018.
+
+COMANDO DA AERONÁUTICA. \textbf{ICA 100-40}: aeronaves não tripuladas e o
+acesso ao espaço aéreo brasileiro. Rio de Janeiro: DECEA, 2026.
+
+COMISSÃO NACIONAL DE ENERGIA NUCLEAR. \textbf{Norma CNEN NN 2.01}: proteção
+física de materiais e instalações nucleares. Rio de Janeiro: CNEN, 2019.
+Aprovada pela Resolução CNEN n.º 253, de 11 de novembro de 2019.
+
+INTERNATIONAL ATOMIC ENERGY AGENCY. \textbf{Nuclear Security Recommendations on
+Physical Protection of Nuclear Material and Nuclear Facilities}
+(INFCIRC/225/Revision 5). Vienna: IAEA, 2011. (IAEA Nuclear Security Series
+n.º 13).
+
+NYGARD, Michael. \textbf{Documenting architecture decisions}. 2011. Cognitect
+Blog. Disponível em:
+https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions.
+Acesso em: 30 out.\ 2026.
+
+OBJECT MANAGEMENT GROUP. \textbf{OMG Unified Modeling Language (OMG UML)},
+version 2.5.1. 2017. Especificação técnica formal/2017-12-05.
+
+SILVA, Leandro Ramos da. \textbf{Software Engineering}: material de aula. São
+Paulo: FIAP, 2026.
+
+}
+
+% =========================================================== APÊNDICE
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{APÊNDICE A — MATRIZ DE RASTREABILIDADE}
+\section*{APÊNDICE A — MATRIZ DE RASTREABILIDADE}
+\vspace{0.6\baselineskip}
+
+A matriz da Tabela~\ref{tab:rastreabilidade} liga cada necessidade identificada
+ao stakeholder que a expressa, às funcionalidades que a atendem e ao benefício
+esperado. Ela serve de verificação interna: necessidade sem requisito indica
+lacuna; requisito sem necessidade indica funcionalidade sem dono.
+
+\begin{table}[H]
+\centering
+\caption{Rastreabilidade entre necessidades, requisitos e benefícios}
+\label{tab:rastreabilidade}
+{\small\singlespacing
+\begin{tabularx}{\textwidth}{X L{3.0cm} L{2.6cm} L{3.4cm}}
+\toprule
+\cab{Necessidade} & \cab{Stakeholder} & \cab{Requisitos} & \cab{Benefício
+esperado} \\
+\midrule
+Perceber a intrusão enquanto ela acontece & Operador; equipe de segurança &
+RF-01, RF-02, RF-03 & Redução do tempo entre evento e compreensão \\
+Não ser inundado por alarme falso & Operador & RF-03, RF-04, RF-13 & Atenção
+dirigida ao que importa \\
+Saber o que esperar antes de chegar ao local & Equipe de segurança física &
+RF-06, RF-08 & Verificação remota antes do deslocamento \\
+Inspecionar sem interromper a operação & Equipe de inspeção & RF-09 & Inspeção
+programada com histórico comparável \\
+Acompanhar o risco de forma consolidada & Gestor da instalação & RF-05, RF-11 &
+Indicadores confiáveis para a direção \\
+Dimensionar turnos pela carga real & Coordenador do centro de operações &
+RF-11 & Distribuição de efetivo baseada em dado \\
+Configurar sem depender do fornecedor & Administrador do sistema & RF-12 &
+Autonomia operacional da equipe \\
+Comprovar conformidade com evidência íntegra & Órgãos reguladores; gestor &
+RF-07, RF-11 & Evidência pronta para auditoria \\
+Não expor imagem nem dado sensível & TI e segurança da informação & RF-07,
+RNF-05, RNF-07 & Tratamento de imagem com controle \\
+Descobrir rapidamente o ponto cego & Operador; administrador & RF-10 & Falha de
+sensor deixa de passar despercebida \\
+Não depender de um único fabricante & Fornecedores; TI & RNF-08 & Base
+replicável para outras instalações \\
+\bottomrule
+\end{tabularx}}
+\fonte{elaborado pelos autores (2026).}
+\end{table}
+
+\end{document}

@@ -1,0 +1,29 @@
+# LaTeX — arquivos intermediários
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Sistema
+.DS_Store
+Thumbs.db
+*~
+
+# Saídas intermediárias de renderização
+pg-*.jpg
+q-*.jpg
+src-doc/principal.pdf
+src-doc/fig_*.png
